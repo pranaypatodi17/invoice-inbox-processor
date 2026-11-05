@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ledgerloop · Arvind Precision Components</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%234f46e5'/%3E%3Cpath d='M8 10h12a5 5 0 0 1 0 10h-7m3 3-3-3 3-3M8 10v12' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body class="app">
+<div class="shell">
+  <aside class="side" id="side">
+    <a href="index.html" class="logo" style="padding:4px 8px"><span class="logo-mark"></span>Ledgerloop</a>
+    <button class="org" id="orgBtn"><span class="oa">AP</span><span style="min-width:0"><b>Arvind Precision</b><small>Growth · Pune plant</small></span><span data-i="chevronDown" style="display:contents"></span></button>
+    <a class="nl" href="#/overview" data-r="overview"><span data-i="home" style="display:contents"></span>Overview</a>
+    <a class="nl" href="#/inbox" data-r="inbox"><span data-i="inbox" style="display:contents"></span>Inbox <span class="cnt" id="cInbox"></span></a>
+    <a class="nl" href="#/invoices" data-r="invoices"><span data-i="file" style="display:contents"></span>Invoices</a>
+    <a class="nl" href="#/exceptions" data-r="exceptions"><span data-i="alert" style="display:contents"></span>Exceptions <span class="cnt red" id="cExc"></span></a>
+    <a class="nl" href="#/payments" data-r="payments"><span data-i="calendar" style="display:contents"></span>Payments</a>
+    <div class="side-sec">Records</div>
+    <a class="nl" href="#/pos" data-r="pos"><span data-i="clipboard" style="display:contents"></span>Purchase orders</a>
+    <a class="nl" href="#/vendors" data-r="vendors"><span data-i="users" style="display:contents"></span>Vendors</a>
+    <div class="side-sec">Workspace</div>
+    <a class="nl" href="#/integrations" data-r="integrations"><span data-i="plug" style="display:contents"></span>Integrations</a>
+    <a class="nl" href="#/settings" data-r="settings"><span data-i="settings" style="display:contents"></span>Rules &amp; settings</a>
+    <div class="usage" id="usage"></div>
+  </aside>
+
+  <div class="main">
+    <header class="top">
+      <button class="burger" id="burger" aria-label="Menu"><span data-i="menu" style="display:contents"></span></button>
+      <div class="search" id="searchBtn" role="button" tabindex="0"><span data-i="search" style="display:contents"></span><span>Search invoices, vendors, POs…</span><kbd class="kbd">Ctrl K</kbd></div>
+      <div class="top-r">
+        <span class="sync" id="syncTxt"><i></i>Gmail synced just now</span>
+        <button class="ibtn" id="uploadBtn" title="Upload invoice"><span data-i="upload" style="display:contents"></span></button>
+        <button class="ibtn" id="helpBtn" title="Help"><span data-i="help" style="display:contents"></span></button>
+        <button class="ibtn" id="bellBtn" title="Notifications"><span data-i="bell" style="display:contents"></span><span class="dot" id="bellDot"></span></button>
+        <button class="me" id="meBtn" title="Account"><span class="avatar" style="background:#7c3aed">NK</span></button>
+      </div>
+    </header>
+    <main id="view"></main>
+  </div>
+</div>
+<div class="toasts" id="toasts"></div>
+
+<script src="assets/js/icons.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

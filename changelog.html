@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Changelog · Ledgerloop</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%234f46e5'/%3E%3Cpath d='M8 10h12a5 5 0 0 1 0 10h-7m3 3-3-3 3-3M8 10v12' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    .cl { max-width: 760px; margin: 0 auto; padding: 64px 24px 0; }
+    .cl h1 { font-size: 40px; font-weight: 800; }
+    .entry { display: grid; grid-template-columns: 140px 1fr; gap: 24px; padding: 36px 0; border-bottom: 1px solid var(--line); }
+    .entry time { color: var(--ink-3); font-size: 14px; font-weight: 600; padding-top: 4px; }
+    .entry h2 { font-size: 22px; margin: 10px 0; }
+    .entry p, .entry li { color: var(--ink-2); }
+    .entry ul { padding-left: 18px; margin: 12px 0 0; display: grid; gap: 6px; }
+    @media (max-width: 640px) { .entry { grid-template-columns: 1fr; gap: 6px; } .cl { padding: 40px 16px 0; } }
+  </style>
+</head>
+<body>
+<header class="nav scrolled"><div class="container nav-inner"><a href="index.html" class="logo"><span class="logo-mark"></span>Ledgerloop</a><div class="nav-cta" style="display:flex"><a href="app.html" class="btn btn-primary btn-sm">Open app</a></div></div></header>
+<main class="cl">
+  <h1>Changelog</h1>
+  <p class="muted" style="margin-top:8px">New features and improvements, shipped every two weeks.</p>
+  <article class="entry"><time>3 Nov 2026</time><div><span class="badge indigo plain">New</span><h2>GST e-invoice IRN verification</h2><p>Invoices carrying an IRN QR code are now verified against the IRP in real time. Signed QR mismatches are flagged as exceptions before the bill is posted.</p><ul><li>Works on scanned and photographed invoices</li><li>IRN and ack number saved to the Tally voucher narration</li></ul></div></article>
+  <article class="entry"><time>20 Oct 2026</time><div><span class="badge teal plain">Improved</span><h2>Faster Tally Prime posting</h2><p>The Ledgerloop Connector v3.2 posts vouchers 4× faster and now supports cost-centre allocation by plant.</p></div></article>
+  <article class="entry"><time>6 Oct 2026</time><div><span class="badge indigo plain">New</span><h2>MSME 45-day payment guard</h2><p>Vendors registered under Udyam are detected automatically. Payment schedules that would breach Section 43B(h) are blocked with a warning.</p></div></article>
+  <article class="entry"><time>22 Sep 2026</time><div><span class="badge indigo plain">New</span><h2>Approve exceptions from Slack</h2><p>Approve variances, hold bills or ask the vendor for a credit note directly from the Slack message — no need to open Ledgerloop.</p></div></article>
+  <article class="entry"><time>8 Sep 2026</time><div><span class="badge teal plain">Improved</span><h2>Regional-language invoices</h2><p>Extraction accuracy on Hindi, Marathi, Gujarati and Tamil invoices improved from 91% to 97.4% field-level accuracy.</p></div></article>
+</main>
+<footer class="footer" style="margin-top:40px"><div class="container foot-bottom" style="margin:0;border:0;padding:0"><span>© 2026 Ledgerloop Technologies Pvt Ltd</span><a href="index.html">← Back to home</a></div></footer>
+<script src="assets/js/icons.js"></script>
+</body>
+</html>

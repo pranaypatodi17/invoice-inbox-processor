@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ledgerloop — Vendor invoices, from inbox to ledger, on autopilot</title>
+  <meta name="description" content="Ledgerloop reads vendor invoices from Gmail, validates GSTIN, matches them to purchase orders, posts bills to Tally or Zoho Books and schedules payments — routing only the exceptions to your accountant on Slack.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%234f46e5'/%3E%3Cpath d='M8 10h12a5 5 0 0 1 0 10h-7m3 3-3-3 3-3M8 10v12' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<div class="announce">New: <b>GST e-invoice IRN verification</b> is now live for all plans · <a href="changelog.html">Read the changelog →</a></div>
+
+<header class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="index.html" class="logo"><span class="logo-mark"></span>Ledgerloop</a>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#features">Features</a>
+      <a href="#integrations">Integrations</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#customers">Customers</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="login.html" class="btn btn-ghost btn-sm" style="border:0;box-shadow:none">Sign in</a>
+      <a href="#demo" class="btn btn-ghost btn-sm">Book a demo</a>
+      <a href="login.html?signup=1" class="btn btn-primary btn-sm">Start free trial</a>
+    </div>
+    <button class="nav-burger" id="burger" aria-label="Menu"><span data-i="menu" style="width:20px;height:20px;display:grid"></span></button>
+  </div>
+  <div class="nav-mobile" id="navMobile">
+    <a href="#how">How it works</a><a href="#features">Features</a><a href="#integrations">Integrations</a><a href="#pricing">Pricing</a><a href="login.html">Sign in</a>
+    <a href="login.html?signup=1" class="btn btn-primary">Start free trial</a>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="eyebrow"><span class="tag">AP automation</span> Built for Indian GST workflows</span>
+        <h1>Vendor invoices, from <span class="grad">inbox to ledger</span> — on autopilot.</h1>
+        <p class="lead">Ledgerloop watches your Gmail, reads every invoice, validates GSTIN, matches it to the PO and GRN, and posts the bill to Tally or Zoho Books. Your team only touches the exceptions.</p>
+        <div class="hero-cta">
+          <a href="login.html?signup=1" class="btn btn-primary btn-lg">Start 14-day free trial <span data-i="arrowRight" style="display:grid"></span></a>
+          <a href="app.html" class="btn btn-ghost btn-lg"><span data-i="eye" style="display:grid"></span> Explore the live workspace</a>
+        </div>
+        <div class="hero-proof">
+          <span data-i="check">No card required</span>
+          <span data-i="check">Connect Gmail in 2 minutes</span>
+          <span data-i="check">Data stored in India (Mumbai)</span>
+        </div>
+      </div>
+
+      <div class="pipe" id="pipe" aria-label="Live processing preview">
+        <div class="pipe-head"><span class="dots"><i></i><i></i><i></i></span> invoices@arvindprecision.in <span class="badge green pulse live">Live</span></div>
+        <div class="pipe-body">
+          <div class="pipe-step" data-s="0"><span class="pipe-ico" style="color:#ea4335;background:#fdecea" data-i="mail"></span><div><b>New email from Kaveri Steel Traders</b><small id="ps0">Tax Invoice KST-1987 · KST-1987.pdf · 212 KB</small></div><span class="check" data-i="check"></span></div>
+          <div class="pipe-step" data-s="1"><span class="pipe-ico" style="color:#4f46e5;background:#eef0ff" data-i="scan"></span><div><b>Extracted 14 fields · 97.2% confidence</b><small id="ps1">₹4,73,086 · IGST ₹72,166 · due 20 Dec 2026</small></div><span class="check" data-i="check"></span></div>
+          <div class="pipe-step" data-s="2"><span class="pipe-ico" style="color:#0d9488;background:#e6f7f5" data-i="shield"></span><div><b>GSTIN 29AAJFK3319P1ZQ verified</b><small id="ps2">Active · Regular taxpayer · no duplicate in 2,914 bills</small></div><span class="check" data-i="check"></span></div>
+          <div class="pipe-step" data-s="3"><span class="pipe-ico" style="color:#d97706;background:#fff5e3" data-i="link"></span><div><b>3-way match with PO-2419 + GRN</b><small id="ps3">Qty ✓ · Tax ✓ · Unit price 6.4% above PO</small></div><span class="check" data-i="alert"></span></div>
+          <div class="pipe-step" data-s="4"><span class="pipe-ico" style="color:#611f69;background:#f6eaf7" data-i="slack"></span><div><b>Routed to #ap-exceptions</b><small id="ps4">Assigned to Neha Kulkarni · SLA 4 working hrs</small></div><span class="check" data-i="check"></span></div>
+        </div>
+        <div class="pipe-foot"><span>Today: <b id="pipeCount">38</b> invoices processed</span><span><b>91%</b> touchless</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOGOS -->
+  <div class="logos container">
+    <p>Trusted by 1,200+ finance teams at manufacturers, distributors and CA firms across India</p>
+    <div class="logo-row">
+      <span><i></i>Sahyadri Forge</span><span><i style="border-radius:50%"></i>Mittal Agro Foods</span><span><i></i>Konark Pharma</span><span><i style="transform:rotate(45deg)"></i>Rajhans Textiles</span><span><i style="border-radius:50%"></i>Patil &amp; Rao CAs</span><span><i></i>Navkar Distributors</span>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <section class="container" style="padding-top:40px">
+    <div class="stats reveal">
+      <div class="stat"><b data-count="4.8" data-dec="1">0</b><span>million invoices processed in FY 25-26</span></div>
+      <div class="stat"><b data-count="91" data-suf="%">0</b><span>reach the ledger without a human touch</span></div>
+      <div class="stat"><b data-count="38" data-suf=" sec">0</b><span>median time from email to posted bill</span></div>
+      <div class="stat"><b data-count="2.3" data-dec="1" data-pre="₹" data-suf=" Cr">0</b><span>duplicate payments blocked last quarter</span></div>
+    </div>
+  </section>
+
+  <!-- HOW -->
+  <section class="section" id="how">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="kicker">How it works</span>
+        <h2>One loop. Every invoice. No retyping.</h2>
+        <p>Ledgerloop replaces the download → open → type into Tally → chase approval → pay → update sheet routine with a single automated workflow.</p>
+      </div>
+      <div class="flow">
+        <div class="flow-card reveal"><span class="num">01 · CAPTURE</span><span class="ico" style="background:#fdecea;color:#ea4335" data-i="inbox"></span><h3>Watch the inbox</h3><p>Connect a shared Gmail or Google Workspace inbox. We pick up PDFs, scans, photos and e-invoice JSON — and ignore newsletters and statements.</p><ul><li>Multi-invoice PDFs split automatically</li><li>WhatsApp forward &amp; upload supported</li></ul></div>
+        <div class="flow-card reveal"><span class="num">02 · UNDERSTAND</span><span class="ico" style="background:#eef0ff;color:#4f46e5" data-i="scan"></span><h3>Extract &amp; validate</h3><p>OCR plus AI pull vendor, GSTIN, invoice no., HSN lines, CGST/SGST/IGST and due date — then verify GSTIN and check for duplicates.</p><ul><li>Hindi &amp; regional-language invoices</li><li>Field-level confidence scores</li></ul></div>
+        <div class="flow-card reveal"><span class="num">03 · MATCH</span><span class="ico" style="background:#e6f7f5;color:#0d9488" data-i="link"></span><h3>Match to PO &amp; GRN</h3><p>Lines are matched against POs in Google Sheets, Excel or your ERP with tolerances you set. Clean matches post straight to Tally or Zoho Books.</p><ul><li>2-way and 3-way matching</li><li>Price, qty and tax-rate tolerance</li></ul></div>
+        <div class="flow-card reveal"><span class="num">04 · PAY</span><span class="ico" style="background:#fff5e3;color:#d97706" data-i="calendar"></span><h3>Schedule &amp; reconcile</h3><p>Payments are queued by vendor terms and MSME 45-day limits. Bank UTRs are matched back and invoices marked paid — automatically.</p><ul><li>HDFC, ICICI, Axis, Kotak feeds</li><li>Remittance email to vendor</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="section soft" id="features">
+    <div class="container">
+      <div class="split">
+        <div class="split-copy reveal">
+          <span class="kicker">AI extraction</span>
+          <h3>Reads invoices the way your best accountant does.</h3>
+          <p>Ledgerloop is trained on over 4 million Indian GST invoices — handwritten totals, stamped scans, two-column layouts and all. Hover a field to see exactly where it came from.</p>
+          <ul class="checks">
+            <li data-i="check"><span><b>14 header fields + every line item</b> including HSN/SAC, quantity, rate and tax split</span></li>
+            <li data-i="check"><span><b>Confidence scoring</b> — low-confidence fields are flagged for review, never guessed</span></li>
+            <li data-i="check"><span><b>Learns your vendors</b> — corrections are remembered for that vendor's next invoice</span></li>
+          </ul>
+        </div>
+        <div class="panel reveal">
+          <div class="panel-h"><span>KST-1987.pdf</span><span class="badge green">Extracted in 4.1s</span></div>
+          <div class="xt">
+            <div class="xt-doc">
+              <div class="xt-scan"></div>
+              <div class="xt-paper">
+                <div class="row"><div><div class="ttl">KAVERI STEEL TRADERS</div><div>#14, 2nd Cross, Peenya Ind. Area</div><div>Bengaluru 560058</div><div>GSTIN: <span class="hl" data-f="gstin">29AAJFK3319P1ZQ</span></div></div><div style="text-align:right"><b>TAX INVOICE</b><div>No: <span class="hl" data-f="num">KST-1987</span></div><div>Date: <span class="hl" data-f="date">05-11-2026</span></div></div></div>
+                <div style="margin-top:8px">Bill to: Arvind Precision Components Pvt Ltd, Bhosari, Pune · PO: <span class="hl" data-f="po">PO-2419</span></div>
+                <table><tr><th>Item</th><th>HSN</th><th>Qty</th><th>Rate</th></tr><tr><td>MS round bar EN8 Ø32</td><td>7214</td><td>4,200 kg</td><td>68.50</td></tr><tr><td>HR sheet IS2062 3mm</td><td>7208</td><td>1,850 kg</td><td>61.20</td></tr></table>
+                <div class="row" style="margin-top:8px"><span>IGST @18%</span><span class="hl" data-f="tax">72,165.60</span></div>
+                <div class="row"><b>Total</b><b class="hl" data-f="total">₹4,73,086.00</b></div>
+                <div class="row"><span>Due: <span class="hl" data-f="due">20-12-2026</span> (45 days)</span></div>
+              </div>
+            </div>
+            <div class="xt-fields">
+              <div class="xt-field" data-f="gstin"><label>Vendor GSTIN</label><span class="mono">29AAJFK3319P1ZQ</span><em>99.8%</em></div>
+              <div class="xt-field" data-f="num"><label>Invoice number</label><span>KST-1987</span><em>99.5%</em></div>
+              <div class="xt-field" data-f="date"><label>Invoice date</label><span>05 Nov 2026</span><em>98.9%</em></div>
+              <div class="xt-field" data-f="po"><label>PO reference</label><span>PO-2419</span><em>97.1%</em></div>
+              <div class="xt-field" data-f="tax"><label>IGST</label><span>₹72,165.60</span><em>99.2%</em></div>
+              <div class="xt-field" data-f="total"><label>Invoice total</label><span>₹4,73,086.00</span><em>99.6%</em></div>
+              <div class="xt-field" data-f="due"><label>Due date</label><span>20 Dec 2026</span><em class="mid">86.0%</em></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="split rev">
+        <div class="split-copy reveal">
+          <span class="kicker">Validation &amp; matching</span>
+          <h3>Catch the ₹3 lakh mistake before it's paid twice.</h3>
+          <p>Every invoice is checked for GSTIN validity, duplicate numbers across financial years, and matched line-by-line against the PO and goods receipt — within the tolerances you define.</p>
+          <ul class="checks">
+            <li data-i="check"><span><b>GSTIN checksum + portal status</b> — cancelled or suspended registrations are flagged to protect your ITC</span></li>
+            <li data-i="check"><span><b>Fuzzy duplicate detection</b> — catches "INV-0042" vs "INV/42" and re-sent forwards</span></li>
+            <li data-i="check"><span><b>Reads POs where they live</b> — Google Sheets, Excel on OneDrive, Tally, or SAP B1</span></li>
+          </ul>
+        </div>
+        <div class="panel mt reveal">
+          <div class="panel-h"><span>3-way match · KST-1987 ↔ PO-2419 ↔ GRN-8812</span><span class="badge amber">1 variance</span></div>
+          <table>
+            <thead><tr><th>Line</th><th>PO</th><th>GRN</th><th>Invoice</th><th>Result</th></tr></thead>
+            <tbody>
+              <tr><td>MS round bar — qty</td><td>4,200 kg</td><td>4,200 kg</td><td>4,200 kg</td><td class="ok">Match</td></tr>
+              <tr class="bad"><td>MS round bar — rate</td><td>₹64.40</td><td>—</td><td>₹68.50</td><td class="diff">+6.4%</td></tr>
+              <tr><td>HR sheet — qty</td><td>1,850 kg</td><td>1,850 kg</td><td>1,850 kg</td><td class="ok">Match</td></tr>
+              <tr><td>HR sheet — rate</td><td>₹61.20</td><td>—</td><td>₹61.20</td><td class="ok">Match</td></tr>
+              <tr><td>GST rate</td><td>18%</td><td>—</td><td>18%</td><td class="ok">Match</td></tr>
+              <tr><td>GSTIN</td><td colspan="3">29AAJFK3319P1ZQ · Active since Jul 2017</td><td class="ok">Valid</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="split">
+        <div class="split-copy reveal">
+          <span class="kicker">Exceptions on Slack</span>
+          <h3>Humans only see what needs a human.</h3>
+          <p>When something doesn't match, the right person gets the invoice, the PO and a plain-English reason in Slack — and can approve, reject or ask the vendor without leaving the thread.</p>
+          <ul class="checks">
+            <li data-i="check"><span><b>Routing rules</b> by vendor, amount, cost centre or exception type</span></li>
+            <li data-i="check"><span><b>One-click actions</b> — approve with variance, hold, or email vendor for a credit note</span></li>
+            <li data-i="check"><span><b>SLA reminders</b> and escalations to the finance controller</span></li>
+          </ul>
+        </div>
+        <div class="slack reveal">
+          <div class="slack-top"># ap-exceptions <span>· Arvind Precision</span></div>
+          <div class="slack-msg">
+            <div class="slack-av" style="background:linear-gradient(135deg,#6366f1,#0d9488)"><span class="logo-mark" style="width:22px;height:22px;box-shadow:none;background:none"></span></div>
+            <div>
+              <div class="slack-name">Ledgerloop<span class="app">APP</span><small>9:48 AM</small></div>
+              <div>⚠️ <b>Price variance</b> on invoice from <b>Kaveri Steel Traders</b> — needs approval. <span style="color:#1264a3">@Neha Kulkarni</span></div>
+              <div class="slack-att">
+                <div class="kv"><div><b>Invoice</b>KST-1987 · ₹4,73,086</div><div><b>PO</b>PO-2419 · ₹4,52,766</div><div><b>Variance</b>+₹20,320 (4.5%)</div><div><b>Tolerance</b>±2% or ₹5,000</div></div>
+                <div style="font-size:13px;color:var(--ink-2)">MS round bar billed at ₹68.50/kg vs PO ₹64.40/kg.</div>
+              </div>
+              <div class="slack-btns"><button class="primary" id="slackApprove">Approve variance</button><button>Hold</button><button>Ask vendor for credit note</button><button>Open in Ledgerloop</button></div>
+            </div>
+          </div>
+          <div class="slack-reply" id="slackReply">💬 2 replies · <b>Vikram Joshi</b>: "Rate revised on 1 Nov due to steel index — approved by me on email."</div>
+        </div>
+      </div>
+
+      <div class="split rev">
+        <div class="split-copy reveal">
+          <span class="kicker">Payments &amp; reconciliation</span>
+          <h3>Pay on time, every time. Never pay twice.</h3>
+          <p>Approved bills are scheduled by payment terms, early-pay discounts and MSME timelines. When the bank confirms the transfer, the UTR is matched and the bill is marked paid in your books.</p>
+          <ul class="checks">
+            <li data-i="check"><span><b>Weekly payment runs</b> with approver sign-off and bank-ready bulk upload files</span></li>
+            <li data-i="check"><span><b>Auto-reconciliation</b> from bank statements, account aggregator or email alerts</span></li>
+            <li data-i="check"><span><b>Remittance advice</b> sent to the vendor with TDS breakdown</span></li>
+          </ul>
+        </div>
+        <div class="panel reveal">
+          <div class="panel-h"><span>Payment run · Friday</span><span class="badge teal">₹9,42,316 · 5 bills</span></div>
+          <div class="panel-b cal" id="calDemo"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTEGRATIONS -->
+  <section class="section" id="integrations">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="kicker">Integrations</span>
+        <h2>Works with the tools you already run on.</h2>
+        <p>No rip-and-replace. Ledgerloop sits between your inbox, your purchase records and your books.</p>
+      </div>
+      <div class="int-grid" id="intGrid"></div>
+    </div>
+  </section>
+
+  <!-- ROI -->
+  <section class="section soft" id="roi">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="kicker">ROI calculator</span>
+        <h2>See what manual AP is costing you.</h2>
+        <p>Based on median processing times across 1,200 Ledgerloop customers.</p>
+      </div>
+      <div class="calc reveal">
+        <div class="calc-in">
+          <div class="range"><label>Vendor invoices per month <output id="oInv">400</output></label><input type="range" id="rInv" min="50" max="5000" step="50" value="400"></div>
+          <div class="range"><label>Minutes spent per invoice today <output id="oMin">12</output></label><input type="range" id="rMin" min="3" max="30" step="1" value="12"></div>
+          <div class="range"><label>Monthly cost of an AP accountant <output id="oCost">₹38,000</output></label><input type="range" id="rCost" min="18000" max="90000" step="1000" value="38000"></div>
+          <div class="range"><label>Invoices with errors or duplicates <output id="oErr">2.5%</output></label><input type="range" id="rErr" min="0" max="8" step="0.5" value="2.5"></div>
+        </div>
+        <div class="calc-out">
+          <div><div class="lbl">Estimated annual savings</div><div class="big" id="cSave">₹0</div></div>
+          <div class="grid2">
+            <div><b id="cHours">0</b><span class="lbl">hours saved / month</span></div>
+            <div><b id="cFte">0</b><span class="lbl">FTE freed up</span></div>
+            <div><b id="cErr">₹0</b><span class="lbl">errors avoided / yr</span></div>
+            <div><b id="cPlan">Growth</b><span class="lbl">recommended plan</span></div>
+          </div>
+          <a href="login.html?signup=1" class="btn btn-lg" style="background:#fff;color:#1e1b4b;margin-top:auto">Start saving — free for 14 days</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="section" id="pricing">
+    <div class="container" style="text-align:center">
+      <div class="section-head reveal" style="margin-bottom:28px">
+        <span class="kicker">Pricing</span>
+        <h2>Priced by invoice volume. Not by seats.</h2>
+        <p>Invite your whole finance team, your CA and your approvers at no extra cost.</p>
+      </div>
+      <div class="billing-toggle" id="billToggle"><button data-b="m">Monthly</button><button data-b="y" class="on">Annual <span class="save">−20%</span></button></div>
+      <div class="plans" id="plans" style="text-align:left"></div>
+      <p class="price-note">All prices exclude 18% GST. Extra invoices billed at the plan's overage rate — no surprise lock-outs.</p>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section soft" id="customers">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="kicker">Customers</span>
+        <h2>Month-end close, without the month-end panic.</h2>
+      </div>
+      <div class="quotes">
+        <div class="quote reveal"><span class="metric">Close cut from 9 days to 3</span><p>"We get about 1,100 supplier invoices a month across three plants. Two people used to do nothing but type them into Tally. Now they review the 8–9% that Ledgerloop flags and the rest just lands in our books."</p><div class="who"><span class="av" style="background:#7c3aed">SD</span><div><b>Sunil Deshpande</b><small>CFO, Sahyadri Forge · Kolhapur</small></div></div></div>
+        <div class="quote reveal"><span class="metric">₹11.4 lakh duplicates blocked</span><p>"Distributors live and die on margins. In the first quarter it caught 14 duplicate invoices — vendors re-sending the same bill with a new number format. That alone paid for three years of the subscription."</p><div class="who"><span class="av" style="background:#0891b2">PJ</span><div><b>Priya Jain</b><small>Finance Head, Navkar Distributors · Indore</small></div></div></div>
+        <div class="quote reveal"><span class="metric">42 clients on one dashboard</span><p>"As a CA firm we manage AP for 42 SME clients. Each client forwards invoices to their own Ledgerloop inbox and we review exceptions in one place. Our juniors finally do actual accounting."</p><div class="who"><span class="av" style="background:#ea580c">AR</span><div><b>CA Abhijit Rao</b><small>Partner, Patil &amp; Rao Chartered Accountants · Pune</small></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal"><span class="kicker">FAQ</span><h2>Questions finance teams ask us</h2></div>
+      <div class="faq">
+        <details open><summary>Do I need to change how vendors send invoices?</summary><p>No. Keep your existing invoices@ address — just add Ledgerloop as a delegate in Google Workspace, or auto-forward to your unique Ledgerloop address. Vendors don't notice a thing.</p></details>
+        <details><summary>How does Ledgerloop post bills into Tally Prime?</summary><p>A lightweight connector runs alongside Tally on your server or Tally on Cloud. It creates purchase vouchers with the correct ledgers, GST classification, cost centres and the original PDF attached. Zoho Books connects via OAuth in one click.</p></details>
+        <details><summary>What happens to invoices that don't match a purchase order?</summary><p>They're routed to the person you choose on Slack (or email / Microsoft Teams) with the reason, the invoice and the closest PO. They can approve, hold, or reject — and the decision is recorded in the audit log.</p></details>
+        <details><summary>Is my financial data safe?</summary><p>Data is encrypted in transit (TLS 1.3) and at rest (AES-256), hosted in AWS Mumbai. We are ISO 27001 certified and SOC 2 Type II audited. We never train shared models on your documents.</p></details>
+        <details><summary>Does it handle TDS and RCM?</summary><p>Yes. TDS sections (194C, 194J, 194Q etc.) are suggested per vendor and deducted from the payable amount. Reverse-charge invoices are identified and posted with the correct RCM ledgers.</p></details>
+        <details><summary>We're an accounting firm. Can we manage multiple clients?</summary><p>The Firm plan gives you a multi-entity console, per-client inboxes and books, white-label vendor emails and consolidated exception queues. Pricing is per invoice across all clients.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="container" id="demo">
+    <div class="cta-band reveal">
+      <div>
+        <h2>Process your next 100 invoices free.</h2>
+        <p>Connect your Gmail and see your own invoices extracted, matched and ready to post — usually within 10 minutes of signing up.</p>
+      </div>
+      <form class="cta-form" id="ctaForm">
+        <input type="email" required placeholder="Work email" aria-label="Work email">
+        <input type="text" placeholder="Company name" aria-label="Company name">
+        <button class="btn btn-lg" type="submit">Get started</button>
+        <small>Or <a href="#" id="demoLink" style="text-decoration:underline">book a 20-minute walkthrough</a> with our team.</small>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="foot-grid">
+      <div><a href="index.html" class="logo"><span class="logo-mark"></span>Ledgerloop</a><p class="muted" style="margin-top:14px;font-size:14px;max-width:280px">Accounts payable automation for Indian businesses. Made in Pune.</p></div>
+      <div><h4>Product</h4><ul><li><a href="#features">Features</a></li><li><a href="#integrations">Integrations</a></li><li><a href="#pricing">Pricing</a></li><li><a href="changelog.html">Changelog</a></li><li><a href="app.html">Live workspace</a></li></ul></div>
+      <div><h4>Solutions</h4><ul><li><a href="#">Manufacturers</a></li><li><a href="#">Distributors</a></li><li><a href="#">CA &amp; accounting firms</a></li><li><a href="#">Multi-entity groups</a></li></ul></div>
+      <div><h4>Resources</h4><ul><li><a href="#">GST invoice guide</a></li><li><a href="#">MSME 45-day rule</a></li><li><a href="#">API docs</a></li><li><a href="#">Help centre</a></li></ul></div>
+      <div><h4>Company</h4><ul><li><a href="#">About</a></li><li><a href="#">Careers <span class="badge indigo plain" style="height:18px;font-size:10.5px">Hiring</span></a></li><li><a href="#">Security</a></li><li><a href="#">Contact</a></li></ul></div>
+    </div>
+    <div class="foot-bottom"><span>© 2026 Ledgerloop Technologies Pvt Ltd · CIN U72900PN2022PTC209114</span><span class="status-dot">All systems operational</span><span><a href="#">Privacy</a> · <a href="#">Terms</a> · <a href="#">DPA</a></span></div>
+  </div>
+</footer>
+
+<div class="toasts" id="toasts"></div>
+<script src="assets/js/icons.js"></script>
+<script src="assets/js/site.js"></script>
+</body>
+</html>
